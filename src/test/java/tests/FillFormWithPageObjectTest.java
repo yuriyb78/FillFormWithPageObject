@@ -75,4 +75,14 @@ public class FillFormWithPageObjectTest {
                 .checkTableValue("Address","")
                 .checkTableValue("State and City","");
     }
+
+    // Негативный тест без заполнения обязательных полей формы
+    @Test
+    void notFillFormRequiredFieldTest(){
+        registrationPage.openPage()
+                .clickSubmit()
+                .checkValidation()
+                .checkNotVisibleModalWindow();
+
+    }
 }

@@ -12,7 +12,8 @@ import static com.codeborne.selenide.Selenide.executeJavaScript;
 
 public class RegistrationPage {
 
-    private SelenideElement firstNameInput = $("#firstName"),
+    private SelenideElement userForm = $("#userForm"),
+                firstNameInput = $("#firstName"),
                 lastNameInput = $("#lastName"),
                 userEmailInput = $("#userEmail"),
                 genderInput = $("#genterWrapper"),
@@ -113,13 +114,28 @@ public class RegistrationPage {
     }
     public RegistrationPage checkTableValue (String column, String value) {
         int lenghtValue = value.length();
-        if (lenghtValue > 1) {
+        if (lenghtValue >= 1) {
             fieldTable.$(byText(column)).parent().shouldHave(text(value));
         } else {
             fieldTable.$(byText(column)).parent().$("td",1).shouldHave(exactText(value));
         };
         return this;
-
     }
 
+    public RegistrationPage checkValidation() {
+        String valueName = "border-color";
+        String colorRed = "rgb(220, 53, 69)";
+        userForm.shouldHave(cssClass("was-validated"));
+        firstNameInput.shouldHave(cssValue(valueName,colorRed));
+        lastNameInput.shouldHave(cssValue(valueName,colorRed));
+        genderInput.$("label[for='gender-radio-1']").shouldHave(cssValue(valueName,colorRed)); //Male
+        genderInput.$("label[for='gender-radio-2']").shouldHave(cssValue(valueName,colorRed)); //Female
+        genderInput.$("label[for='gender-radio-3']").shouldHave(cssValue(valueName,colorRed)); //Other
+        phoneNumberInpit.shouldHave(cssValue(valueName,colorRed));
+        return this;
+    }
+    public void checkNotVisibleModalWindow () {
+        modalWindow.shouldNotBe(visible);
+
+    }
 }
