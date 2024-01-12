@@ -5,8 +5,7 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.Keys;
 import pages.Component.CalendarComponent;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
@@ -113,7 +112,12 @@ public class RegistrationPage {
         return this;
     }
     public RegistrationPage checkTableValue (String column, String value) {
-        fieldTable.$(byText(column)).parent().shouldHave(text(value));
+        int lenghtValue = value.length();
+        if (lenghtValue > 1) {
+            fieldTable.$(byText(column)).parent().shouldHave(text(value));
+        } else {
+            fieldTable.$(byText(column)).parent().$("td",1).shouldHave(exactText(value));
+        };
         return this;
 
     }

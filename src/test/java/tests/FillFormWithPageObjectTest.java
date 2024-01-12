@@ -21,6 +21,8 @@ public class FillFormWithPageObjectTest {
             nameState = "NCR",
             nameCity = "Delhi";
 
+   // Тест с заполнением всех полей формы
+   // и проверкой правильности их заполенения в итоговой таблице
     @Test
     void fillFormWithAllFieldTest(){
         registrationPage.openPage()
@@ -48,5 +50,29 @@ public class FillFormWithPageObjectTest {
                 .checkTableValue("Picture",namePicture)
                 .checkTableValue("Address",fullAddress)
                 .checkTableValue("State and City",nameState + " " + nameCity);
+    }
+
+    // Тест с заполнением только обязательных полей формы
+    // и проверкой правильности их заполенения в итоговой таблице
+    @Test
+    void fillFormWithOnlyRequiredFieldTest(){
+        registrationPage.openPage()
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .setGender(genderValue)
+                .setUserPhoneNumber(phoneNumber)
+                .setDateOfBirthDay(dayOfBirthDay,monthOfBirthDay,yearOfBirthDay)
+                .clickSubmit()
+                .checkModalWindow()
+                .checkTableValue("Student Name",firstName + " " + lastName)
+                .checkTableValue("Student Email","")
+                .checkTableValue("Gender",genderValue)
+                .checkTableValue("Mobile",phoneNumber)
+                .checkTableValue("Date of Birth",dayOfBirthDay + " " + monthOfBirthDay + "," + yearOfBirthDay)
+                .checkTableValue("Subjects","")
+                .checkTableValue("Hobbies","")
+                .checkTableValue("Picture","")
+                .checkTableValue("Address","")
+                .checkTableValue("State and City","");
     }
 }
