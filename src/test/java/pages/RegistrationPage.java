@@ -5,6 +5,8 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.Keys;
 import pages.Component.CalendarComponent;
 
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
@@ -23,7 +25,9 @@ public class RegistrationPage {
                 addressInput = $("#currentAddress"),
                 selectState = $("#react-select-3-input"),
                 selectCity = $("#react-select-4-input"),
-                btnSubmit = $("#submit");
+                btnSubmit = $("#submit"),
+                modalWindow = $(".modal-open"),
+                fieldTable = $(".table");
     CalendarComponent setCalendarDay = new CalendarComponent();
 
     public RegistrationPage openPage() {
@@ -63,7 +67,7 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage setDateOfBirtDay (String day, String month, String year) {
+    public RegistrationPage setDateOfBirthDay (String day, String month, String year) {
         dateOfBirthInput.click();
         setCalendarDay.setCalendar(day, month, year);
         return this;
@@ -102,6 +106,16 @@ public class RegistrationPage {
     public  RegistrationPage clickSubmit () {
         btnSubmit.click();
         return this;
+    }
+
+    public RegistrationPage checkModalWindow () {
+        modalWindow.shouldBe(visible);
+        return this;
+    }
+    public RegistrationPage checkTableValue (String column, String value) {
+        fieldTable.$(byText(column)).parent().shouldHave(text(value));
+        return this;
+
     }
 
 }
