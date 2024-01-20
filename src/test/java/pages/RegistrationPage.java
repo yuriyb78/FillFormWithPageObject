@@ -1,9 +1,8 @@
 package pages;
 
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.Keys;
-import pages.Component.CalendarComponent;
+import pages.сomponent.CalendarComponent;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
@@ -12,16 +11,16 @@ import static com.codeborne.selenide.Selenide.executeJavaScript;
 
 public class RegistrationPage {
 
-    private SelenideElement userForm = $("#userForm"),
+    private final SelenideElement userForm = $("#userForm"),
                 firstNameInput = $("#firstName"),
                 lastNameInput = $("#lastName"),
                 userEmailInput = $("#userEmail"),
                 genderInput = $("#genterWrapper"),
-                phoneNumberInpit = $("#userNumber"),
+                phoneNumberInput = $("#userNumber"),
                 dateOfBirthInput = $("#dateOfBirthInput"),
                 subjectInput = $("#subjectsInput"),
                 chooseHobbie= $("#hobbiesWrapper"),
-                uplouadPicture = $("#uploadPicture"),
+                uploadPicture = $("#uploadPicture"),
                 addressInput = $("#currentAddress"),
                 selectState = $("#react-select-3-input"),
                 selectCity = $("#react-select-4-input"),
@@ -33,8 +32,7 @@ public class RegistrationPage {
     public RegistrationPage openPage() {
 
         // Открыть браузер на заданной странице
-        Configuration.pageLoadStrategy = "eager";
-        open("https://demoqa.com/automation-practice-form");  // Открытие браузера на нужной странице
+        open("/automation-practice-form");  // Открытие браузера на нужной странице
         executeJavaScript("$('#fixedban').remove()"); // Скрытие рекламы
         executeJavaScript("$('footer').remove()");  // Скрытие футера
         //Configuration.holdBrowserOpen = true; // Чтобы браузер не закрывался после выполенения теста
@@ -63,7 +61,7 @@ public class RegistrationPage {
     }
 
     public RegistrationPage setUserPhoneNumber (String phoneNumber) {
-        phoneNumberInpit.setValue(phoneNumber);
+        phoneNumberInput.setValue(phoneNumber);
         return this;
     }
 
@@ -84,7 +82,7 @@ public class RegistrationPage {
     }
 
     public  RegistrationPage setUploadPicture (String nameFile) {
-        uplouadPicture.uploadFromClasspath(nameFile);
+        uploadPicture.uploadFromClasspath(nameFile);
         return this;
     }
 
@@ -131,7 +129,7 @@ public class RegistrationPage {
         genderInput.$("label[for='gender-radio-1']").shouldHave(cssValue(valueName,colorRed)); //Male
         genderInput.$("label[for='gender-radio-2']").shouldHave(cssValue(valueName,colorRed)); //Female
         genderInput.$("label[for='gender-radio-3']").shouldHave(cssValue(valueName,colorRed)); //Other
-        phoneNumberInpit.shouldHave(cssValue(valueName,colorRed));
+        phoneNumberInput.shouldHave(cssValue(valueName,colorRed));
         return this;
     }
     public void checkNotVisibleModalWindow () {

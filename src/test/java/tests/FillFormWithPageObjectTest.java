@@ -3,7 +3,7 @@ package tests;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
 
-public class FillFormWithPageObjectTest {
+public class FillFormWithPageObjectTest extends BaseTests {
 
     RegistrationPage registrationPage = new RegistrationPage();
     String firstName = "Joe",
