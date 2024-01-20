@@ -9,5 +9,6 @@ public class BaseTests {
     static void setUp() {
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
+        //Configuration.holdBrowserOpen = true; // Чтобы браузер не закрывался после выполенения теста
     }
 }

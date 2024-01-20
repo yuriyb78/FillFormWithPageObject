@@ -2,7 +2,7 @@ package pages;
 
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.Keys;
-import pages.сomponent.CalendarComponent;
+import pages.component.CalendarComponent;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
@@ -35,7 +35,6 @@ public class RegistrationPage {
         open("/automation-practice-form");  // Открытие браузера на нужной странице
         executeJavaScript("$('#fixedban').remove()"); // Скрытие рекламы
         executeJavaScript("$('footer').remove()");  // Скрытие футера
-        //Configuration.holdBrowserOpen = true; // Чтобы браузер не закрывался после выполенения теста
 
         return this;
     }
@@ -72,7 +71,7 @@ public class RegistrationPage {
     }
 
     public  RegistrationPage setSubjectInput (String value){
-        subjectInput.setValue(value).sendKeys(Keys.ARROW_DOWN, Keys.ARROW_DOWN, Keys.ENTER);
+        subjectInput.setValue(value).pressEnter();
         return this;
     }
 
@@ -116,7 +115,7 @@ public class RegistrationPage {
             fieldTable.$(byText(column)).parent().shouldHave(text(value));
         } else {
             fieldTable.$(byText(column)).parent().$("td",1).shouldHave(exactText(value));
-        };
+        }
         return this;
     }
 
