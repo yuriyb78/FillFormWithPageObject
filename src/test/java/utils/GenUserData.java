@@ -14,18 +14,15 @@ public class GenUserData {
         return ThreadLocalRandom.current().nextInt(min, max + 1);
     }
     public static String getRandomFirstName () {
-        String firstName = faker.name().firstName();
-        return firstName;
+        return faker.name().firstName();
     }
 
     public static String getRandomLastName () {
-        String lastName = faker.name().lastName();
-        return lastName;
+           return faker.name().lastName();
     }
 
     public static String getRandomEmailAddress () {
-        String emailAddress = faker.internet().emailAddress();
-        return emailAddress;
+        return faker.internet().emailAddress();
     }
 
     public static String getRandomGenderValue () {
@@ -75,8 +72,7 @@ public class GenUserData {
     }
 
     public static String getRandomFullAddress () {
-        String fullAddress = faker.address().fullAddress();
-        return fullAddress;
+        return faker.address().fullAddress();
     }
 
     private static final Map<String, String[]> citiesByState = new HashMap<>();
