@@ -4,14 +4,13 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.Keys;
 import pages.component.CalendarComponent;
 
-import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 
 public class RegistrationPage {
 
-    private final SelenideElement userForm = $("#userForm"),
+    public final SelenideElement userForm = $("#userForm"),
                 firstNameInput = $("#firstName"),
                 lastNameInput = $("#lastName"),
                 userEmailInput = $("#userEmail"),
@@ -24,9 +23,7 @@ public class RegistrationPage {
                 addressInput = $("#currentAddress"),
                 selectState = $("#react-select-3-input"),
                 selectCity = $("#react-select-4-input"),
-                btnSubmit = $("#submit"),
-                modalWindow = $(".modal-open"),
-                fieldTable = $(".table");
+                btnSubmit = $("#submit");
     CalendarComponent setCalendarDay = new CalendarComponent();
 
     public RegistrationPage openPage() {
@@ -105,34 +102,5 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage checkModalWindow () {
-        modalWindow.shouldBe(visible);
-        return this;
-    }
-    public RegistrationPage checkTableValue (String column, String value) {
-        int lenghtValue = value.length();
-        if (lenghtValue >= 1) {
-            fieldTable.$(byText(column)).parent().shouldHave(text(value));
-        } else {
-            fieldTable.$(byText(column)).parent().$("td",1).shouldHave(exactText(value));
-        }
-        return this;
-    }
 
-    public RegistrationPage checkValidation() {
-        String valueName = "border-color";
-        String colorRed = "rgb(220, 53, 69)";
-        userForm.shouldHave(cssClass("was-validated"));
-        firstNameInput.shouldHave(cssValue(valueName,colorRed));
-        lastNameInput.shouldHave(cssValue(valueName,colorRed));
-        genderInput.$("label[for='gender-radio-1']").shouldHave(cssValue(valueName,colorRed)); //Male
-        genderInput.$("label[for='gender-radio-2']").shouldHave(cssValue(valueName,colorRed)); //Female
-        genderInput.$("label[for='gender-radio-3']").shouldHave(cssValue(valueName,colorRed)); //Other
-        phoneNumberInput.shouldHave(cssValue(valueName,colorRed));
-        return this;
-    }
-    public void checkNotVisibleModalWindow () {
-        modalWindow.shouldNotBe(visible);
-
-    }
 }

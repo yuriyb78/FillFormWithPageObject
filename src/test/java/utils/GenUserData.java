@@ -4,15 +4,11 @@ import com.github.javafaker.Faker;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class GenUserData {
 
     static Faker faker = new Faker();
 
-    private static int getRandomInt(int min, int max) {
-        return ThreadLocalRandom.current().nextInt(min, max + 1);
-    }
     public static String getRandomFirstName () {
         return faker.name().firstName();
     }
@@ -31,12 +27,11 @@ public class GenUserData {
     }
 
     public static String getRandomPhoneNumber() {
-        return String.format("%s%s%s%s", getRandomInt(111, 999),
-                getRandomInt(111, 999), getRandomInt(11, 99), getRandomInt(11, 99));
+        return faker.number().digits(10);
     }
 
-    public static String getRandomDayOfBirthDay () {
-        return String.format("%s",getRandomInt(1,31));
+    public static int getRandomDayOfBirthDay () {
+        return faker.number().numberBetween(1,31);
     }
 
     public static String getRandomMonthOfBirthDay (String dayOfBirthDay) {
@@ -53,17 +48,17 @@ public class GenUserData {
                     "July", "August", "October", "December"};
         }
         //int i =  getRandomInt(0, monthOfBirthDay.length - 1);
-        return new Faker().options().option(monthOfBirthDay);
+        return faker.options().option(monthOfBirthDay);
     }
 
-    public static String getRandomYearOfBirthDay () {
-        return String.format("%s",getRandomInt(1960,2023));
+    public static int getRandomYearOfBirthDay () {
+        return  faker.number().numberBetween(1950,2010);
     }
 
     public static String getRandomGetRandomSubject() {
         String[] subjects = {"Maths", "Arts", "English",
                 "Biology", "Hindi", "Commerce"};
-        return new Faker().options().option(subjects);
+        return faker.options().option(subjects);
     }
 
     public static String getRandomHobbies() {

@@ -2,11 +2,12 @@ package tests;
 
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
-import utils.GenUserData;
+import pages.component.CheckResultRegistrationForm;
 
 public class FillFormWithPageObjectTest extends BaseTests {
 
     RegistrationPage registrationPage = new RegistrationPage();
+    CheckResultRegistrationForm checkResultRegistrationForm = new CheckResultRegistrationForm();
     String firstName = "Joe",
             lastName = "Doe",
             emailAddress = "email@email.com",
@@ -39,8 +40,9 @@ public class FillFormWithPageObjectTest extends BaseTests {
                 .setAddress(fullAddress)
                 .setState(nameState)
                 .setCity(nameCity)
-                .clickSubmit()
-                .checkModalWindow()
+                .clickSubmit();
+
+        checkResultRegistrationForm.checkModalWindow()
                 .checkTableValue("Student Name",firstName + " " + lastName)
                 .checkTableValue("Student Email",emailAddress)
                 .checkTableValue("Gender",genderValue)
@@ -63,8 +65,9 @@ public class FillFormWithPageObjectTest extends BaseTests {
                 .setGender(genderValue)
                 .setUserPhoneNumber(phoneNumber)
                 .setDateOfBirthDay(dayOfBirthDay,monthOfBirthDay,yearOfBirthDay)
-                .clickSubmit()
-                .checkModalWindow()
+                .clickSubmit();
+
+        checkResultRegistrationForm.checkModalWindow()
                 .checkTableValue("Student Name",firstName + " " + lastName)
                 .checkTableValue("Student Email","")
                 .checkTableValue("Gender",genderValue)
@@ -81,8 +84,9 @@ public class FillFormWithPageObjectTest extends BaseTests {
     @Test
     void notFillFormRequiredFieldTest(){
         registrationPage.openPage()
-                .clickSubmit()
-                .checkValidation()
+                .clickSubmit();
+
+        checkResultRegistrationForm.checkValidation()
                 .checkNotVisibleModalWindow();
 
     }
