@@ -16,7 +16,7 @@ public class FillFormWithPageObjectTest extends BaseTests {
             dayOfBirthDay = "25",
             monthOfBirthDay = "June",
             yearOfBirthDay = "1978",
-            subjectChar = "a",
+            subjectChar = "Math",
             hobbieValue = "Sports",
             namePicture = "01.jpg",
             fullAddress = "112233, Какая-то область, г. Какой-то, ул. Какая-то д.1, кв.1",
@@ -48,7 +48,7 @@ public class FillFormWithPageObjectTest extends BaseTests {
                 .checkTableValue("Gender",genderValue)
                 .checkTableValue("Mobile",phoneNumber)
                 .checkTableValue("Date of Birth",dayOfBirthDay + " " + monthOfBirthDay + "," + yearOfBirthDay)
-                .checkTableValue("Subjects","Arts")
+                .checkTableValue("Subjects","Math")
                 .checkTableValue("Hobbies",hobbieValue)
                 .checkTableValue("Picture",namePicture)
                 .checkTableValue("Address",fullAddress)
